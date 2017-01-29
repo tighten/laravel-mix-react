@@ -1,6 +1,7 @@
 # laravel-mix-react
 Easy alternative Laravel Mix configuration for projects using React. Includes the babel loaders and Webpack configuration file
-you need to get started.
+you need to get started. (Please note that this is NOT a drop-in replacement for Laravel Mix -- you will still need to
+include the `laravel-mix` package along with this one!)
 
 ## Installation
 Run `npm install --save-dev laravel-mix-react` or `yarn add --dev laravel-mix-react`.
