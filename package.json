@@ -1,0 +1,17 @@
+{
+  "name": "laravel-mix-react",
+  "version": "1.0.0",
+  "description": "Alternate Laravel Mix webpack configuration for React projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samantha Geitz <samantha@tighten.co>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-1": "^6.22.0"
+  }
+}
