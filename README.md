@@ -3,7 +3,7 @@ Easy alternative Laravel Mix configuration for projects using React. Includes th
 you need to get started.
 
 ## Installation
-Run `npm install --dev laravel-mix-react`
+Run `npm install --save-dev laravel-mix-react` or `yarn add --dev laravel-mix-react`.
 
 In your project's `package.json`, update all references to `--config="node_modules/laravel-mix/setup/webpack.config.js"` 
 within the "scripts" to point to `node_modules/laravel-mix-react/setup/webpack.config.js`.
