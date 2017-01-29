@@ -9,14 +9,6 @@ Run `npm install --save-dev laravel-mix-react` or `yarn add --dev laravel-mix-re
 In your project's `package.json`, update all references to `--config="node_modules/laravel-mix/setup/webpack.config.js"` 
 within the "scripts" to point to `node_modules/laravel-mix-react/setup/webpack.config.js`.
 
-Finally, add a `.babelrc` file in your project's root with the following lines: 
-
-```
-{
-  "presets": ["react", "es2015", "stage-1"]
-}
-```
-
 ## Advanced configuration
 
 If you need to make further changes to Webpack, run `cp node_modules/laravel-mix-react/setup/webpack.config.js ./` in your 
