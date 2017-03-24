@@ -78,14 +78,14 @@ module.exports.module = {
             test: /\.jsx?$/,
             exclude: /(node_modules|bower_components)/,
             loader: 'babel-loader' + Mix.babelConfig(),
-	    query: {
+            query: {
                 babelrc: false,
                 presets: [
                     'es2015',
                     'react',
                     'stage-1'
                 ]
-      	    }
+            }
         },
 
         {
@@ -114,23 +114,22 @@ if (Mix.cssPreprocessor) {
             Mix.cssOutput(toCompile)
         );
 
-    module.exports.module.rules.push({
-        test: new RegExp(toCompile.src.path),
-        loader: extractPlugin.extract({
-            fallbackLoader: 'style-loader',
-            loader: [
-                'css-loader',
-                'postcss-loader',
-                'resolve-url-loader',
-                (Mix.cssPreprocessor == 'sass') ? 'sass-loader?sourceMap&precision=8' : 'less-loader'
-            ]
-        })
+        module.exports.module.rules.push({
+            test: new RegExp(toCompile.src.path),
+            loader: extractPlugin.extract({
+                fallbackLoader: 'style-loader',
+                loader: [
+                    'css-loader',
+                    'postcss-loader',
+                    'resolve-url-loader',
+                    (Mix.cssPreprocessor == 'sass') ? 'sass-loader?sourceMap&precision=8' : 'less-loader'
+                ]
+            })
+        });
+
+        module.exports.plugins = (module.exports.plugins || []).concat(extractPlugin);
     });
-
-    module.exports.plugins = (module.exports.plugins || []).concat(extractPlugin);
-});
 }
-
 
 
 /*
@@ -146,7 +145,6 @@ if (Mix.cssPreprocessor) {
 module.exports.resolve = {
     extensions: ['*', '.js', '.jsx'],
 };
-
 
 
 /*
@@ -168,8 +166,7 @@ module.exports.stats = {
     errors: false
 };
 
-module.exports.performance = { hints: false };
-
+module.exports.performance = {hints: false};
 
 
 /*
@@ -184,7 +181,6 @@ module.exports.performance = { hints: false };
  */
 
 module.exports.devtool = Mix.sourcemaps;
-
 
 
 /*
@@ -202,7 +198,6 @@ module.exports.devServer = {
     noInfo: true,
     compress: true
 };
-
 
 
 /*
@@ -228,7 +223,7 @@ module.exports.plugins = (module.exports.plugins || []).concat([
 
     new plugins.StatsWriterPlugin({
         filename: "mix-manifest.json",
-        transform: Mix.manifest.transform,
+        transform: Mix.manifest.transform.bind(Mix.manifest),
     }),
 
     new plugins.WebpackMd5HashPlugin(),
@@ -240,11 +235,10 @@ module.exports.plugins = (module.exports.plugins || []).concat([
                 require('autoprefixer')
             ],
             context: __dirname,
-            output: { path: './' }
+            output: {path: './'}
         }
     })
 ]);
-
 
 
 if (Mix.notifications) {
@@ -261,7 +255,7 @@ if (Mix.notifications) {
 module.exports.plugins.push(
     new plugins.WebpackOnBuildPlugin(
         () => Mix.events.fire('build')
-)
+    )
 );
 
 
@@ -271,8 +265,8 @@ if (Mix.versioning) {
     module.exports.plugins.push(
         new plugins.WebpackOnBuildPlugin(() => {
             Mix.versioning.prune(Mix.publicPath);
-})
-);
+        })
+    );
 }
 
 
@@ -280,17 +274,17 @@ if (Mix.combine || Mix.minify) {
     module.exports.plugins.push(
         new plugins.WebpackOnBuildPlugin(() => {
             Mix.concatenateAll().minifyAll();
-})
-);
+        })
+    );
 }
 
 
 if (Mix.copy) {
     Mix.copy.forEach(copy => {
         module.exports.plugins.push(
-        new plugins.CopyWebpackPlugin([copy])
-    );
-});
+            new plugins.CopyWebpackPlugin([copy])
+        );
+    });
 }
 
 
